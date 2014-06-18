@@ -21,7 +21,7 @@ class NasaraMobileApiClient {
 
 		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments.$this->urlParams);
 
-		print($response);
+		return $response;
 	}
 
 	public function checkCredit(){
@@ -30,7 +30,7 @@ class NasaraMobileApiClient {
 
 		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments);
 
-		print($response);
+		return $response;
 
 	}
 }
