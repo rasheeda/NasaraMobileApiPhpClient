@@ -23,4 +23,14 @@ class NasaraMobileApiClient {
 
 		print($response);
 	}
+
+	public function checkCredit(){
+
+		$this->baseUrl = $this->baseUrl."/accounts/credit";
+
+		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments);
+
+		print($response);
+
+	}
 }
