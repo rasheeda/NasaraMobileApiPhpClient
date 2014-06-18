@@ -1,6 +1,6 @@
 <?php
 
-class NasaraMobileApiClass{
+class NasaraMobileApiClient {
 
 	public $apiKey;
 	public $baseUrl;
@@ -21,7 +21,6 @@ class NasaraMobileApiClass{
 
 		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments.$this->urlParams);
 
-		var_dump($response);
-
+		print($response);
 	}
 }
