@@ -10,7 +10,7 @@ class NasaraMobileApiClient {
 
 	public function __construct(){
 
-		$this->apiKey = "52a775db0dd8152a775db141cd";
+		$this->apiKey = "52a775db0dd9j82a775db1009s";
 		$this->baseUrl = "http://sms.nasaramobile.com/api";
 		$this->baseUrlArguments = "?api_key=".$this->apiKey;
 	}
