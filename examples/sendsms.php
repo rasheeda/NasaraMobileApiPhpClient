@@ -6,7 +6,7 @@ $phone = "233xxxxxxxxx";
 $senderId = "NTesting";
 $message = "hey there, this is a test message!";
 
-$smsApi = new NasaraMobileApiClient;
+$smsApi = new NasaraMobileApiClient("G4Kno/FQHQ1Au.YdWYqMY.9E");
 $result = $smsApi->sendSms($phone, $senderId, $message);
 
 if($result == '1801'){
