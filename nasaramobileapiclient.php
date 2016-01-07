@@ -9,7 +9,6 @@ class NasaraMobileApiClient {
 	public $baseUrl;
 	public $baseUrlArguments;
 	public $urlParams;
-	public $baseUrlVersionTwo;
 
 	protected $client;
 
@@ -19,7 +18,6 @@ class NasaraMobileApiClient {
 		$this->apiKey = $apiKey;
 		$this->baseUrl = "http://sms.nasaramobile.com/api/";
 		$this->baseUrlArguments = "?api_key=".$this->apiKey;
-		$this->baseUrlVersionTwo = "http://sms.nasaramobile.com/api/v2";
 
 		$this->client = new GuzzleHttp\Client(['base_uri' => $this->baseUrl]);;
 
@@ -52,9 +50,20 @@ class NasaraMobileApiClient {
 
 	}
 
-	public function sendSmsVersionTwo($phone, $senderId, $message){
+	public function sendSmsVersionTwo($phoneNumbers, $senderId, $message, $groups = null, $contactIds = null){
 
-		return "something here!";
+		$response = $this->client->request("POST", "v2/sendsms", [
+
+			"query" => [
+
+				"api_key" => $this->apiKey,
+				"phone_numbers" => urlencode($phoneNumbers),
+				"sender_id" => $senderId,
+				"message" => $message
+			]
+		]);
+
+		return $response->getBody();
 
 	}
 
