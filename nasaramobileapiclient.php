@@ -116,4 +116,15 @@ class NasaraMobileApiClient {
 		return $response->getBody();
 
 	}
+
+	//fetch account sms credit balance (version 2)
+	public  function fetchAccountCredit(){
+
+		$response = $this->client->request('GET', 'v2/accounts/credit', [
+
+			'query' => ['api_key' => $this->apiKey]
+		]);
+
+		return $response->getBody();
+	}
 }
