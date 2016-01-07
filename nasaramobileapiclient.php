@@ -94,8 +94,26 @@ class NasaraMobileApiClient {
 	}
 
 	//get groups
+	public function fetchGroups(){
 
+		$response = $this->client->request('GET', 'v2/groups', [
+
+			'query' => ['api_key' => $this->apiKey]
+		]);
+
+		return $response->getBody();
+
+	}
 
 	//get group details
+	public function fetchGroupDetails($groupId){
 
+		$response = $this->client->request('GET', 'v2/contacts/'.$groupId, [
+
+			'query' => ['api_key' => $this->apiKey]
+		]);
+
+		return $response->getBody();
+
+	}
 }
