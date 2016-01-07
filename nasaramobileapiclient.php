@@ -27,17 +27,24 @@ class NasaraMobileApiClient {
 
 	public function sendSms($phone, $senderId, $message){
 
-		$this->urlParams = "&sender_id=".$senderId."&&phone=".$phone."&message=".urlencode($message);
+		$response = $this->client->request("GET", "", [
 
-		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments.$this->urlParams);
+			"query" => [
 
-		return $response;
+				"api_key" => $this->apiKey,
+				"phone" => $phone,
+				"sender_id" => $senderId,
+				"message" => $message
+			]
+		]);
+
+		return $response->getBody();
 	}
 
 	public function checkCredit(){
 
-		$this->baseUrl = $this->baseUrl."/accounts/credit";
 		$response = $this->client->request('GET', 'accounts/credit', [
+
 			'query' => ['api_key' => $this->apiKey]
 		]);
 
