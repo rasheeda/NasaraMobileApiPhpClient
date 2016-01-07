@@ -41,12 +41,7 @@ class NasaraMobileApiClient {
 
 	public function checkCredit(){
 
-		$response = $this->client->request('GET', 'accounts/credit', [
-
-			'query' => ['api_key' => $this->apiKey]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest('accounts/credit');
 
 	}
 
@@ -70,57 +65,41 @@ class NasaraMobileApiClient {
 	//get contacts
 	public function fetchContacts(){
 
-		$response = $this->client->request('GET', 'v2/contacts', [
-
-			'query' => ['api_key' => $this->apiKey]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest('v2/contacts');
 
 	}
 
-
-	//get contact details
 	//get contacts
 	public function fetchContactDetails($contactId){
 
-		$response = $this->client->request('GET', 'v2/contacts/'.$contactId, [
-
-			'query' => ['api_key' => $this->apiKey]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest('v2/contacts/'.$contactId);
 
 	}
 
 	//get groups
 	public function fetchGroups(){
 
-		$response = $this->client->request('GET', 'v2/groups', [
-
-			'query' => ['api_key' => $this->apiKey]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest('v2/groups');
 
 	}
 
 	//get group details
 	public function fetchGroupDetails($groupId){
 
-		$response = $this->client->request('GET', 'v2/contacts/'.$groupId, [
-
-			'query' => ['api_key' => $this->apiKey]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest('v2/contacts/'.$groupId);
 
 	}
 
 	//fetch account sms credit balance (version 2)
 	public  function fetchAccountCredit(){
 
-		$response = $this->client->request('GET', 'v2/accounts/credit', [
+		return $this->genericGetRequest('v2/accounts/credit');
+	}
+
+	//function to handle all GET requests that require only an API key as a parameter
+	private function genericGetRequest($URL){
+
+		$response = $this->client->request('GET', $URL, [
 
 			'query' => ['api_key' => $this->apiKey]
 		]);
