@@ -25,23 +25,20 @@ class NasaraMobileApiClient {
 
 	public function sendSms($phone, $senderId, $message){
 
-		$response = $this->client->request("GET", "", [
+		$queryData = [
 
-			"query" => [
+			"api_key" => $this->apiKey,
+			"phone" => $phone,
+			"sender_id" => $senderId,
+			"message" => $message
+		];
 
-				"api_key" => $this->apiKey,
-				"phone" => $phone,
-				"sender_id" => $senderId,
-				"message" => $message
-			]
-		]);
-
-		return $response->getBody();
+		return $this->genericGetRequest("", $queryData);
 	}
 
-	public function checkCredit(){
+	public function checkCredit($queryData = null){
 
-		return $this->genericGetRequest('accounts/credit');
+		return $this->genericGetRequest('accounts/credit', $queryData);
 
 	}
 
@@ -63,45 +60,46 @@ class NasaraMobileApiClient {
 	}
 
 	//get contacts
-	public function fetchContacts(){
+	public function fetchContacts($queryData = null){
 
-		return $this->genericGetRequest('v2/contacts');
+		return $this->genericGetRequest('v2/contacts', $queryData);
 
 	}
 
 	//get contacts
-	public function fetchContactDetails($contactId){
+	public function fetchContactDetails($queryData = null, $contactId){
 
-		return $this->genericGetRequest('v2/contacts/'.$contactId);
+		return $this->genericGetRequest('v2/contacts/'.$contactId, $queryData);
 
 	}
 
 	//get groups
-	public function fetchGroups(){
+	public function fetchGroups($queryData = null){
 
-		return $this->genericGetRequest('v2/groups');
+		return $this->genericGetRequest('v2/groups', $queryData);
 
 	}
 
 	//get group details
-	public function fetchGroupDetails($groupId){
+	public function fetchGroupDetails($queryData = null, $groupId){
 
-		return $this->genericGetRequest('v2/contacts/'.$groupId);
+		return $this->genericGetRequest('v2/contacts/'.$groupId, $queryData);
 
 	}
 
 	//fetch account sms credit balance (version 2)
-	public  function fetchAccountCredit(){
+	public  function fetchAccountCredit($queryData = null){
 
-		return $this->genericGetRequest('v2/accounts/credit');
+		return $this->genericGetRequest('v2/accounts/credit', $queryData);
 	}
 
 	//function to handle all GET requests that require only an API key as a parameter
-	private function genericGetRequest($URL){
+	private function genericGetRequest($URL, $queryData ){
 
 		$response = $this->client->request('GET', $URL, [
 
-			'query' => ['api_key' => $this->apiKey]
+			'query' => ["api_key" => $this->apiKey],
+			'query' => $queryData
 		]);
 
 		return $response->getBody();
