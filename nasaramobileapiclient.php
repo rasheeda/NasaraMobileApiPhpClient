@@ -81,7 +81,17 @@ class NasaraMobileApiClient {
 
 
 	//get contact details
+	//get contacts
+	public function fetchContactDetails($contactId){
 
+		$response = $this->client->request('GET', 'v2/contacts/'.$contactId, [
+
+			'query' => ['api_key' => $this->apiKey]
+		]);
+
+		return $response->getBody();
+
+	}
 
 	//get groups
 
