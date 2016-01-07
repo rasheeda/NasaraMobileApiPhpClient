@@ -2,7 +2,7 @@
 
 require_once('../nasaramobileapiclient.php');
 
-$smsApi = new NasaraMobileApiClient("G4Kno/FQHQ1Au.YdWYqMY.9E");
+$smsApi = new NasaraMobileApiClient("9EEPC38Eyf9N6Mc8beMEH");
 $result = $smsApi->checkCredit();
 
 switch ($result) {
