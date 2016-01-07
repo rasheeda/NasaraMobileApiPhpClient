@@ -1,18 +1,28 @@
 <?php
 
+require 'vendor/autoload.php';
+use GuzzleHttp\Client;
+
 class NasaraMobileApiClient {
 
 	public $apiKey;
 	public $baseUrl;
 	public $baseUrlArguments;
 	public $urlParams;
+	public $baseUrlVersionTwo;
+
+	protected $client;
 
 
 	public function __construct($apiKey){
 
 		$this->apiKey = $apiKey;
-		$this->baseUrl = "http://sms.nasaramobile.com/api";
+		$this->baseUrl = "http://sms.nasaramobile.com/api/";
 		$this->baseUrlArguments = "?api_key=".$this->apiKey;
+		$this->baseUrlVersionTwo = "http://sms.nasaramobile.com/api/v2";
+
+		$this->client = new GuzzleHttp\Client(['base_uri' => $this->baseUrl]);;
+
 	}
 
 	public function sendSms($phone, $senderId, $message){
@@ -27,10 +37,14 @@ class NasaraMobileApiClient {
 	public function checkCredit(){
 
 		$this->baseUrl = $this->baseUrl."/accounts/credit";
+		$response = $this->client->request("GET", "accounts/credit".$this->baseUrlArguments.$this->urlParams);
+		return $response->getBody();
 
-		$response = file_get_contents($this->baseUrl.$this->baseUrlArguments);
+	}
 
-		return $response;
+	public function sendSmsVersionTwo($phone, $senderId, $message){
+
+		return "something here!";
 
 	}
 
