@@ -37,7 +37,10 @@ class NasaraMobileApiClient {
 	public function checkCredit(){
 
 		$this->baseUrl = $this->baseUrl."/accounts/credit";
-		$response = $this->client->request("GET", "accounts/credit".$this->baseUrlArguments.$this->urlParams);
+		$response = $this->client->request('GET', 'accounts/credit', [
+			'query' => ['api_key' => $this->apiKey]
+		]);
+
 		return $response->getBody();
 
 	}
