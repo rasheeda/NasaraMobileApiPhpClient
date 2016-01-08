@@ -67,7 +67,7 @@ class NasaraMobileApiClient {
 	}
 
 	//get contacts
-	public function fetchContactDetails($queryData = null, $contactId){
+	public function fetchContactDetails($contactId, $queryData = null){
 
 		return $this->genericGetRequest('v2/contacts/'.$contactId, $queryData);
 
@@ -81,7 +81,7 @@ class NasaraMobileApiClient {
 	}
 
 	//get group details
-	public function fetchGroupDetails($queryData = null, $groupId){
+	public function fetchGroupDetails($groupId, $queryData = null){
 
 		return $this->genericGetRequest('v2/contacts/'.$groupId, $queryData);
 
@@ -96,9 +96,12 @@ class NasaraMobileApiClient {
 	//function to handle all GET requests that require only an API key as a parameter
 	private function genericGetRequest($URL, $queryData ){
 
+		if(!$queryData){
+			$queryData = ["api_key" => $this->apiKey];
+		}
+
 		$response = $this->client->request('GET', $URL, [
 
-			'query' => ["api_key" => $this->apiKey],
 			'query' => $queryData
 		]);
 
