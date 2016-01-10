@@ -94,6 +94,11 @@ class NasaraMobileApiClient {
 	}
 
 	//function to handle all GET requests that require only an API key as a parameter
+	/**
+	 * @param $URL
+	 * @param $queryData
+	 * @return \Psr\Http\Message\StreamInterface
+     */
 	private function genericGetRequest($URL, $queryData ){
 
 		if(!$queryData){
